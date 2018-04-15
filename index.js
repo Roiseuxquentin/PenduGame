@@ -15,7 +15,7 @@ const body = document.getElementById('body')
 const help1 = document.getElementById('indice1')
 
 let boucle = true
-let dead = false
+let dead = true
 let array = []
  
 let cases = '<span class="col-auto"></span><span class="youp col-auto border border-danger"><h1>?</h1></span>'
@@ -49,12 +49,6 @@ let position = [[50, 280, 300, 30],
   [295, 188, 330, 250],]
 
 const indiceOne = [ 
-  `Le mots fait ${word.nb} lettres!` ,
-  `Le Temps c'est cool` ,
-  `Trouve le maux avant le pendu` ,
-  `Le mots est en Français , parfois...`,
-  `Tu as trouvè ${array.length} lettres, il en reste ..`,
-  `Il n'y a pas la lettre ${array}`,
   `Le mot est du genre ${word.genre}`, 
 ] 
 const indiceTwo = [ 
@@ -156,7 +150,8 @@ helpDeclencheur(route)
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 const draw = () => {
-  drawRules()
+
+
 if (dead === false){  
   document.addEventListener('keydown', listen)
   console.log(i)
@@ -195,47 +190,31 @@ else{
 
 
 const drawRules = () =>{
-   
-  ctx.beginPath()
-  ctx.font="30px Courier";
-  ctx.fillStyle = "black"
-  ctx.fillText(`PENDU GAME`,115,50)
-  ctx.moveTo(40, 60)
-  ctx.lineTo(360, 60)
-  ctx.strokeStyle = "black"
-  ctx.stroke()
-  ctx.font="15px Courier"
-  ctx.fillText(`1 - Trouver les maux avant le pendu`,35,100);
-  ctx.fillText(`2 - Le mot qui nous concernes a `,35,120);
-  
-  ctx.closePath()
-
+    ctx.clearRect(0,0,150,150)
+    ctx.beginPath()
+    ctx.font="30px Courier";
+    ctx.fillStyle = "black"
+    ctx.fillText(`PENDU GAME`,115,50)
+    ctx.moveTo(40, 60)
+    ctx.lineTo(360, 60)
+    ctx.strokeStyle = "black"
+    ctx.stroke()
+    ctx.font="14px Courier"
+    ctx.fillText(`1 - Trouver les maux avant le pendu`,40,95)
+    ctx.fillText(`2 - Le mot qui nous concernes fait :`,40,125)
+    ctx.fillText(` ${word.nb} lettres! `, 240 , 140)
+    ctx.font="14px Courier";  
+    ctx.fillText(`3 - Les touches touchèes disparaissent`,40,160)
+    ctx.font="13px Courier";  
+    ctx.fillText(`4 - Le mots est en Français , parfois...`,40,190)
+    ctx.font="12px Courier";  
+    ctx.fillText(`5 - Les indices seront fournis ...`,40,215)
+    ctx.font="11px Courier";  
+    ctx.fillText(`6 - Le Temps c'est cool`,40,240)
+    ctx.font="10px Courier";  
+    ctx.fillText(`7 - On se referre aux 6 precedentes`,40,265)
+    ctx.closePath()
 }
-
-
-
-// const indiceOne = [ 
-//   `Le mots fait ${word.nb} lettres!` ,
-//   `Le Temps c'est cool` ,
-//   `Trouve le maux avant le pendu` ,
-//   `Le mots est en Français , parfois...`,
-//   `Tu as trouvè ${array.length} lettres, il en reste ..`,
-//   `Il n'y a pas la lettre ${array}`,
-//   `Le mot est du genre ${word.genre}`, 
-// ] 
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 const drawTime = () => {
@@ -401,8 +380,16 @@ const restart = () =>{
   location.reload()
 }
 
-draw()
 
+if (dead === true){
+  drawRules()
+}
+
+document.addEventListener('keydown' , e =>{
+  ctx.clearRect(0, 0, 400, 300)
+  dead = false
+  draw()
+})
 
 // au click v1.2
 // document.getElementById('a').addEventListener('click' , e => {
