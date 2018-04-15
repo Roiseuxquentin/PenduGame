@@ -1,5 +1,4 @@
-//PENDU V.1
-
+//PENDU V
 //TODO LIST
 //check indice2 === suppression de lettre
 //fetch pour check les Json
@@ -62,12 +61,29 @@ const indiceThree = () => {
 
 document.getElementById('lettre').innerHTML = cases.repeat(word.nb)
 
+
+
+////////////////////FUNCTION//
+
+/////////
+//output
+//random number
+///////////////
+
 const rdmNb = (min , max) => {
   let nb= Math.random() * (max - min) + min; 
   return Math.round(nb)
 }
 
-//Trouver la bonne cadence
+
+
+
+///////////////
+//calcul time
+//change color 
+//for stress
+///////////////
+
 const addTime = () => {
 
 ctx.clearRect(0, 0, 90, 80)
@@ -101,6 +117,13 @@ ctx.clearRect(0, 0, 90, 80)
     
     }
 }
+
+
+
+//////////////////////
+//INDICEs injection
+//and timmer for push
+/////////////////////
 
 const loupeIndice = () => {
 
@@ -147,7 +170,10 @@ const helpDeclencheur = (route) => {
 helpDeclencheur(route)
   
 
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+////////////////
+//Drawing board
+//with if forest
+////////////////
 
 const draw = () => {
 
@@ -188,6 +214,12 @@ else{
   }
 }
 
+
+/////////////////////////////
+//Elements are rdy to be draw
+//let position =
+// [x, y, w, h]
+////////////////////////////
 
 const drawRules = () =>{
     ctx.clearRect(0,0,150,150)
@@ -278,6 +310,10 @@ const drawHead = () => {
 }
 
 
+//////////
+//keyboard
+////////// 
+
 const makeKeyboard = () => {
     const mapped1 = key[0].map(src => `<div id="lettre${src.toUpperCase()}" class="key col-1">${src}</div>`).join('')
     const mapped2 = key[1].map(src => `<div id="lettre${src.toUpperCase()}" class="key col-1">${src}</div>`).join('')
@@ -292,6 +328,7 @@ const makeKeyboard = () => {
     `
 }
 
+document.getElementById('keyboard').innerHTML = makeKeyboard(key)
 
 
 const removeKey = (keyName) =>{
@@ -321,6 +358,12 @@ const removeKey = (keyName) =>{
 
 }
 
+
+////////////////////////////////////////////////
+//Compare input keyboard and array with solution
+//if ok , make new array with same length but include only match key from input keyboard
+//else draw on canvas and delete key to keyboard
+//////////////////////////////////////////////// 
 
 const listen = () =>{
   time = 10
@@ -374,8 +417,9 @@ const listen = () =>{
   }
 }
 
-document.getElementById('keyboard').innerHTML = makeKeyboard(key)
-
+//////////////////////
+//Restart from refresh
+//////////////////////
 const restart = () =>{
   location.reload()
 }
