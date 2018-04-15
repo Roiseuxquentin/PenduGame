@@ -99,8 +99,11 @@ ctx.clearRect(0, 0, 90, 80)
       canvas.style.background = 'white'
       canvas.style.border = '3px solid red'
     }
-    else
+    else if (i === 11) 
+      canvas.style.background = 'white'
+    else 
       canvas.style.background = 'black'
+
 
 
     time--
@@ -414,10 +417,12 @@ const listen = () =>{
     document.getElementById('lettre').innerHTML = `<span class="invisible"><h1>BRAVO!</h1></span>`
     ctx.clearRect(0, 0, 400, 300)
     drawText(' *BRAVO*')
+    dead = true
     document.getElementById('canvas').style.background = 'white'
     document.getElementById('body').style.background = 'black'
     i = 11
-    canvas.addEventListener('click', restart)
+    body.addEventListener('click', restart)
+    body.addEventListener('keydown', restart)
 
 }
   
@@ -441,10 +446,9 @@ if (dead === true){
 document.addEventListener('keydown' , e =>{
 
 if (dead === true){
-  drawRules()
+  dead = false
   ctx.clearRect(0, 0, 400, 300)
 }  
-  dead = false
   draw()
 })
 
