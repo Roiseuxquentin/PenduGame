@@ -210,7 +210,6 @@ else{
     document.getElementById('body').style.background = 'black'
     body.addEventListener('click', restart)
     body.addEventListener('keydown', restart)
-    time = -1
   }
 }
 
@@ -250,24 +249,27 @@ const drawRules = () =>{
 
 
 const drawTime = () => {
-  ctx.beginPath()
-  if (time < 4){
-    ctx.arc(10, -10, 100,0, Math.PI * 2)
-    ctx.fillStyle = "white"
-    ctx.fill()
-    ctx.font="80px Courier"
-    ctx.fillStyle = "red"
-    ctx.fillText(`${time}`,20,60)
+  
+  if (dead === false) {  
+    ctx.beginPath()
+    if (time < 4){
+      ctx.arc(10, -10, 100,0, Math.PI * 2)
+      ctx.fillStyle = "white"
+      ctx.fill()
+      ctx.font="80px Courier"
+      ctx.fillStyle = "red"
+      ctx.fillText(`${time}`,20,60)
+    }
+    else if (time > 3){
+      ctx.arc(10, -10, 100,0, Math.PI * 2)
+      ctx.fillStyle = "red"
+      ctx.fill()
+      ctx.font="40px Courier"
+      ctx.fillStyle = "white"
+      ctx.fillText(`${time}`,20,50)
+    }
+    ctx.closePath()
   }
-  else if (time > 3){
-    ctx.arc(10, -10, 100,0, Math.PI * 2)
-    ctx.fillStyle = "red"
-    ctx.fill()
-    ctx.font="40px Courier"
-    ctx.fillStyle = "white"
-    ctx.fillText(`${time}`,20,50)
-  }
-  ctx.closePath()
 }
 
 const drawText = (text) =>{
