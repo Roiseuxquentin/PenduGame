@@ -1,5 +1,6 @@
-//PENDU V
-//TODO LIST
+//PENDU GAME
+//V1.2
+
 //check indice2 === suppression de lettre
 //fetch pour check les Json
   
