@@ -2,7 +2,6 @@
 //TODO LIST
 //check indice2 === suppression de lettre
 //fetch pour check les Json
-//horloge time canvas rond ?
   
 const canvas = document.getElementById('canvas')
 const ctx = canvas.getContext('2d')
@@ -47,18 +46,6 @@ let position = [[50, 280, 300, 30],
   [250, 250, 285, 190],
   [295, 188, 330, 250],]
 
-const indiceOne = [ 
-  `Le mot est du genre ${word.genre}`, 
-] 
-const indiceTwo = [ 
-  
-  // supprimer 3 lettres
-]
-
-const indiceThree = () => {
-  body.style.backgroundImage = "url('img/photographie.jpg')"
-}
-
 document.getElementById('lettre').innerHTML = cases.repeat(word.nb)
 
 
@@ -74,9 +61,6 @@ const rdmNb = (min , max) => {
   let nb= Math.random() * (max - min) + min; 
   return Math.round(nb)
 }
-
-
-
 
 ///////////////
 //calcul time
@@ -104,8 +88,6 @@ ctx.clearRect(0, 0, 90, 80)
     else 
       canvas.style.background = 'black'
 
-
-
     time--
 
     if (time === 0){
@@ -127,6 +109,26 @@ ctx.clearRect(0, 0, 90, 80)
 //INDICEs injection
 /////////////////////
 
+const indiceOne = [ 
+  `Le mot est du genre ${word.genre}`, 
+]
+
+const indiceTwo = () =>{
+    let i = 0
+
+    while (i < 3){
+      let diff = key[i].filter(element => !solution.includes(element));
+      let diffRdm = rdmNb(0, diff.length)
+      console.log(diff[diffRdm])
+      removeKey(diff[diffRdm])
+      i++
+    }
+}
+
+const indiceThree = () => {
+  body.style.backgroundImage = "url('img/photographie.jpg')"
+}
+
 const loupeIndice = () => {
 
     return `
@@ -146,26 +148,25 @@ const loupeIndice = () => {
 
 
 const helpDeclencheur = (route) => {
-  console.log("to indice delcencheur")
   help1.innerHTML = loupeIndice(indice1,indice2,indice3) 
   if (route === 1){
-    
-
     indice1 = `<img class="invisible" width="80" src="indice.png" >`
-    document.getElementById('useless').innerHTML = `<p>${indiceOne[rdmNb(0,5)]}</p>`
+    document.getElementById('useless').innerHTML = `<p>${indiceOne}</p>`
     help1.innerHTML = loupeIndice(indice1,indice2,indice3) 
   }
   
   else if (route === 2){
+    indiceTwo()
     indice3 = `<img class="invisible" width="80" src="indice.png" >`
     //action pour insice 2 sur keyboard
     help1.innerHTML = loupeIndice(indice1,indice2,indice3)
   }
-  else if (route === 3){
+  else if (route ===3)
+    indiceTwo()
+  else if (route === 4){
     indice2 = `<img class="invisible" width="80" src="indice.png" >`
     indiceThree()    
     help1.innerHTML = loupeIndice(indice1,indice2,indice3)
-
   }
 }
 
@@ -182,7 +183,6 @@ const draw = () => {
 
 if (dead === false){  
   document.addEventListener('keydown', listen)
-  console.log(i)
 
   if (i === 0 && boucle === false){
     interval = setInterval(addTime , 300)
@@ -205,7 +205,6 @@ if (dead === false){
   }
 }
 else{
-  console.log('mort')
     ctx.clearRect(0, 0, 400, 300)
     drawText('GAME OVER')
     canvas.style.border = '2px solid red'
@@ -224,6 +223,7 @@ else{
 ////////////////////////////
 
 const drawRules = () =>{
+  
     ctx.clearRect(0,0,150,150)
     ctx.beginPath()
     ctx.font="30px Courier";
@@ -234,19 +234,19 @@ const drawRules = () =>{
     ctx.strokeStyle = "black"
     ctx.stroke()
     ctx.font="14px Courier"
-    ctx.fillText(`1 - Trouver les maux avant le pendu`,40,95)
+    ctx.fillText(`1 - Trouver les maux avant le pendu `,40,95)
     ctx.fillText(`2 - Le mot qui nous concernes fait :`,40,125)
     ctx.fillText(` ${word.nb} lettres! `, 240 , 140)
     ctx.font="14px Courier";  
-    ctx.fillText(`3 - Les touches touchèes disparaissent`,40,160)
+    ctx.fillText(`3 - Le mots est en Français , parfois...`, 40,160)
     ctx.font="13px Courier";  
-    ctx.fillText(`4 - Le mots est en Français , parfois...`,40,190)
+    ctx.fillText(`4 - Le Temps c'est cool !`,40,190)
     ctx.font="12px Courier";  
-    ctx.fillText(`5 - Les indices seront fournis ...`,40,215)
+    ctx.fillText(`5 - Les indices tu auras si patience tu as...`,40,215)
     ctx.font="11px Courier";  
-    ctx.fillText(`6 - Le Temps c'est cool`,40,240)
+    ctx.fillText(`6 - Les touches touchèes tentent et disparaissent`,40,240)
     ctx.font="10px Courier";  
-    ctx.fillText(`7 - On se referre aux 6 precedentes`,40,265)
+    ctx.fillText(`7 - Se referrer aux 6 precedentes regles`,40,265)
     ctx.closePath()
 }
 
@@ -280,13 +280,13 @@ const drawText = (text) =>{
 
   ctx.font="60px Courier";
   ctx.fillStyle = "red"
-  ctx.fillText(`${text}`,45,150)
+  ctx.fillText(`${text}`,40,150)
   ctx.font="20px Courier"
   if (i === 10)
     ctx.fillStyle = "white"
   else 
     ctx.fillStyle = "black"
-  ctx.fillText(`Click pour rejouer`,90,200);
+  ctx.fillText(`Press or Click pour rejouer`,50,200);
   ctx.closePath()
 
 }
@@ -348,22 +348,18 @@ const removeKey = (keyName) =>{
 
   if (key[0].includes(keyName)){
     index = (key[0].indexOf(keyName))
-    console.log(index)
     delete key[0][index]
   }
   else if (key[1].includes(keyName)){
    index = (key[1].indexOf(keyName))
-   console.log(index)
    delete key[1][index]
   }
   else if (key[2].includes(keyName)){
    index = (key[2].indexOf(keyName))
-   console.log(index)
    delete key[2][index]   
   }
   else if (key[3].includes(keyName)){
     index = (key[3].indexOf(keyName))
-    console.log(index)
     delete key[3][index]
   }
     document.getElementById('keyboard').innerHTML = makeKeyboard(key)
@@ -378,6 +374,7 @@ const removeKey = (keyName) =>{
 //////////////////////////////////////////////// 
 
 const listen = () =>{
+
   time = 10
   let found = []
   const keyName = event.key
@@ -438,7 +435,9 @@ const restart = () =>{
   location.reload()
 }
 
-
+/////////////////////
+//START
+////////////////////
 if (dead === true){
   drawRules()
 }
