@@ -386,7 +386,11 @@ if (dead === true){
 }
 
 document.addEventListener('keydown' , e =>{
+
+if (dead === true){
+  drawRules()
   ctx.clearRect(0, 0, 400, 300)
+}  
   dead = false
   draw()
 })
