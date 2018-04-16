@@ -350,26 +350,42 @@ const makeKeyboard = () => {
 document.getElementById('keyboard').innerHTML = makeKeyboard(key)
 
 
-const removeKey = (keyName) =>{
-  let index = 0
 
-  if (key[0].includes(keyName)){
-    index = (key[0].indexOf(keyName))
-    delete key[0][index]
+const removeKey = (keyName) =>{
+  let index
+  let i = 0
+
+ // key = key.map(arrLine => {
+ //    delete key[arrLine].indexOf(keyName)
+ //  })
+    
+  while (i < key.length){
+    if (key[i].includes(keyName)){
+        index = (key[i].indexOf(keyName))
+        delete key[i][index]
+    }
+    i++
   }
-  else if (key[1].includes(keyName)){
-   index = (key[1].indexOf(keyName))
-   delete key[1][index]
-  }
-  else if (key[2].includes(keyName)){
-   index = (key[2].indexOf(keyName))
-   delete key[2][index]   
-  }
-  else if (key[3].includes(keyName)){
-    index = (key[3].indexOf(keyName))
-    delete key[3][index]
-  }
-    document.getElementById('keyboard').innerHTML = makeKeyboard(key)
+
+
+  // if (key[0].includes(keyName)){
+  //   index = (key[0].indexOf(keyName))
+  //   delete key[0][index]
+  // }
+  // else if (key[1].includes(keyName)){
+  //  index = (key[1].indexOf(keyName))
+  //  delete key[1][index]
+  // }
+  // else if (key[2].includes(keyName)){
+  //  index = (key[2].indexOf(keyName))
+  //  delete key[2][index]   
+  // }
+  // else if (key[3].includes(keyName)){
+  //   index = (key[3].indexOf(keyName))
+  //   delete key[3][index]
+  // }
+
+   document.getElementById('keyboard').innerHTML = makeKeyboard(key)
 
 }
 
