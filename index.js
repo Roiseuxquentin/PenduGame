@@ -7,12 +7,15 @@
 
 const canvas = document.getElementById('canvas')
 const ctx = canvas.getContext('2d')
+const enseigne = document.getElementById('enseigne')
+const ctxPub = enseigne.getContext('2d')
 
 const wordList = [{'id': 1, 'nb': 12, 'genre' : "feminin", 'name': 'photographie', 'img': '/img/photographie.jpg'},
-                  {'id': 2, 'nb': 4, 'genre' : "masculin", 'name': 'geek', 'img': '/img/geek.jpg'}]
-
-const word = wordList[1]
-const solution = word.name.split('')
+                  {'id': 2, 'nb': 4, 'genre' : "masculin", 'name': 'geek', 'img': '/img/geek.jpg'},
+                  {'id': 3, 'nb': 10, 'genre' : "masculin", 'name': 'hologramme', 'img': '/img/'},
+                  {'id': 4, 'nb': 12, 'genre' : "masculin", 'name': 'cumulonimbus', 'img': '/img/'},
+                  {'id': 5, 'nb': 6, 'genre' : "feminin", 'name': 'mouette', 'img': '/img/'},
+                  {'id': 6, 'nb': 10, 'genre' : "?", 'name': 'formidable', 'img': '/img/'}]
 
 const body = document.getElementById('body')
 const help1 = document.getElementById('indice1')
@@ -22,11 +25,12 @@ let boucle = true
 let dead = true
 let array = []
  
-let cases = '<span class="col-auto"></span><span class="youp col-auto border border-danger"><h1>?</h1></span>'
 
 let route = 0
 let i = -1
 let time = 10
+let publi = 0
+let posPub = 370
 
 
 indice3 = help1.innerHTML = `<img class="rounded " width="80" src="indice.png" >`
@@ -52,11 +56,9 @@ let position = [[50, 280, 300, 30],
   [250, 250, 285, 190],
   [295, 188, 330, 250],]
 
-document.getElementById('lettre').innerHTML = cases.repeat(word.nb)
 
 
 
-////////////////////FUNCTION//
 
 /////////
 //output
@@ -67,6 +69,24 @@ const rdmNb = (min , max) => {
   let nb= Math.random() * (max - min) + min; 
   return Math.round(nb)
 }
+
+///////////
+//Structure
+//letters
+//////////
+
+const word = wordList[rdmNb(0,wordList.length)]
+const solution = word.name.split('')
+  const pub = [ 'Press or Click Pour Debuter !',
+                "le chrono c'est un pied vers la tombe , une mauvaise lettre aussi ...  ",
+                `Le mot est du genre ${word.genre}`,
+                `Il fait ${word.nb} lettres !`,
+              ]
+
+let cases = '<span class="col-auto"></span><span class="youp col-auto border border-danger"><h1>?</h1></span>'
+document.getElementById('lettre').innerHTML = cases.repeat(word.nb)
+
+////////////////////FUNCTION//
 
 ///////////////
 //calcul time
@@ -85,7 +105,6 @@ ctx.clearRect(0, 0, 90, 80)
       canvas.style.border = '3px solid black'
     }
     else if (dead === false) {
-      console.log('dedans')
       canvas.style.background = 'white'
       canvas.style.border = '3px solid red'
     }
@@ -115,20 +134,19 @@ ctx.clearRect(0, 0, 90, 80)
 //INDICEs injection
 /////////////////////
 
-const indiceOne = [ 
-  `Le mot est du genre ${word.genre}`, 
-]
-
 const indiceTwo = () =>{
     let i = 0
-
+    const arr = []
     while (i < 3){
       let diff = key[i].filter(element => !solution.includes(element));
       let diffRdm = rdmNb(0, diff.length)
-      console.log(diff[diffRdm])
+      arr.push(`${diff[diffRdm]}`)
       removeKey(diff[diffRdm])
       i++
     }
+    console.log(arr)
+    pub.push(`Il n'y a pas les lettres : ${arr}`)
+
 }
 
 const indiceThree = () => {
@@ -157,18 +175,17 @@ const helpDeclencheur = (route) => {
   help1.innerHTML = loupeIndice(indice1,indice2,indice3) 
   if (route === 1){
     indice1 = `<img class="invisible" width="80" src="indice.png" >`
-    document.getElementById('useless').innerHTML = `<p>${indiceOne}</p>`
     help1.innerHTML = loupeIndice(indice1,indice2,indice3) 
   }
   
   else if (route === 2){
-    indiceTwo()
+    pub.push(indiceTwo())
     indice3 = `<img class="invisible" width="80" src="indice.png" >`
     //action pour insice 2 sur keyboard
     help1.innerHTML = loupeIndice(indice1,indice2,indice3)
   }
   else if (route ===3)
-    indiceTwo()
+    pub.push(indiceTwo())
   else if (route === 4){
     indice2 = `<img class="invisible" width="80" src="indice.png" >`
     indiceThree()    
@@ -185,8 +202,6 @@ helpDeclencheur(route)
 ////////////////
 
 const draw = () => {
-
-
 
 if (dead === false){  
   document.addEventListener('click' , klick)
@@ -220,6 +235,7 @@ else{
     document.getElementById('body').style.background = 'black'
     body.addEventListener('click', restart)
     body.addEventListener('keydown', restart)
+    
   }
 }
 
@@ -250,7 +266,7 @@ const drawRules = () =>{
     ctx.font="13px Courier";  
     ctx.fillText(`4 - Le Temps c'est cool !`,40,190)
     ctx.font="12px Courier";  
-    ctx.fillText(`5 - Les indices tu auras si patience tu as...`,40,215)
+    ctx.fillText(`5 - Des indices tu auras...`,40,215)
     ctx.font="11px Courier";  
     ctx.fillText(`6 - Les touches touchèes tentent et disparaissent`,40,240)
     ctx.font="10px Courier";  
@@ -305,6 +321,38 @@ const drawPotence = () => {
   ctx.fillStyle = "black"
   ctx.fill()
   ctx.closePath()
+}
+
+
+
+const drawPub = () => {
+
+  ctxPub.clearRect(0,0,400,30)
+
+  if (posPub <= -500){
+    posPub = 400
+    publi++
+  }
+  else if (publi > publi.length )
+    publi = 2
+  else if (dead === true){
+    ctxPub.beginPath()
+    ctxPub.font="22px Courier"
+    ctxPub.fillStyle = "white"
+    ctxPub.fillText(`${word.name.toUpperCase()}`,150,20) 
+    ctxPub.closePath()
+  }
+  else{
+    posPub -= 10
+    ctxPub.beginPath()
+    ctxPub.font="20px Courier"
+    if (time > 3)
+      ctxPub.fillStyle = "white"
+    else 
+      ctxPub.fillStyle = "red"  
+    ctxPub.fillText(`${pub[publi]}`,posPub,20) 
+    ctxPub.closePath()
+  }    
 }
 
 
@@ -503,6 +551,7 @@ const starter = () =>{
   if (dead === true){
     dead = false
     ctx.clearRect(0, 0, 400, 300)
+    setInterval(drawPub , 30)
     drawTime()  
   }
   draw()
