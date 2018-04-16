@@ -3,7 +3,8 @@
 
 //check indice2 === suppression de lettre
 //fetch pour check les Json
-  
+//CE DEBARASSER DES GLOBALs >.<
+
 const canvas = document.getElementById('canvas')
 const ctx = canvas.getContext('2d')
 
@@ -180,15 +181,16 @@ helpDeclencheur(route)
 
 ////////////////
 //Drawing board
-//with if forest
+//with if forest...
 ////////////////
 
 const draw = () => {
 
 
-if (dead === false){  
-  document.addEventListener('keydown', listen)
 
+if (dead === false){  
+  document.addEventListener('click' , klick)
+  document.addEventListener('keydown', listen)
   if (i === 0 && boucle === false){
     interval = setInterval(addTime , 300)
     i++
@@ -346,18 +348,10 @@ const makeKeyboard = () => {
   return keyboard
 }
 
-
-document.getElementById('keyboard').innerHTML = makeKeyboard(key)
-
-
-
 const removeKey = (keyName) =>{
   let index
   let i = 0
 
- // key = key.map(arrLine => {
- //    delete key[arrLine].indexOf(keyName)
- //  })
     
   while (i < key.length){
     if (key[i].includes(keyName)){
@@ -367,28 +361,77 @@ const removeKey = (keyName) =>{
     i++
   }
 
-
-  // if (key[0].includes(keyName)){
-  //   index = (key[0].indexOf(keyName))
-  //   delete key[0][index]
-  // }
-  // else if (key[1].includes(keyName)){
-  //  index = (key[1].indexOf(keyName))
-  //  delete key[1][index]
-  // }
-  // else if (key[2].includes(keyName)){
-  //  index = (key[2].indexOf(keyName))
-  //  delete key[2][index]   
-  // }
-  // else if (key[3].includes(keyName)){
-  //   index = (key[3].indexOf(keyName))
-  //   delete key[3][index]
-  // }
-
+ // key = key.map(arrLine => {
+ //    delete key[arrLine].indexOf(keyName)
+ //  })
    document.getElementById('keyboard').innerHTML = makeKeyboard(key)
-
 }
 
+document.getElementById('keyboard').innerHTML = makeKeyboard(key)
+/////////////
+//MOUSE CLICK
+/////////////
+
+const klick = () =>{
+
+  time = 10
+  let found = []
+  const keyName = event.target.innerHTML
+
+  removeKey(keyName)
+
+  if (boucle === true){
+    addTime()
+    boucle = false
+  }
+
+
+  if (solution.includes(keyName) === true) {
+ 
+    solution.map((element) => {
+      if (element === keyName) {
+        
+        found.push(keyName)
+        array.push(keyName)
+      } 
+      else if (array.includes(element)) 
+        found.push(element)
+      else {
+        // fonction RATER////////////////////////////////////////////////////////
+
+        found.push(' _ ')
+      }
+    })
+    document.getElementById('lettre').innerHTML = `<span class="bg-light  col-auto border border-danger"><h1>${found.join('').toUpperCase()}</h1></span>`
+  }
+  else
+    i++
+  
+  if (found.join('') === word.name) {
+
+    console.log('win')
+    document.getElementById('lettre').innerHTML = `<span class="invisible"><h1>BRAVO!</h1></span>`
+    ctx.clearRect(0, 0, 400, 300)
+    drawText(' *BRAVO*')
+    dead = true
+    document.getElementById('canvas').style.background = 'white'
+    document.getElementById('body').style.background = 'black'
+    i = 11
+    body.addEventListener('click', restart)
+    body.addEventListener('keydown', restart)
+
+}
+  
+  if (i <= 10){
+  draw() 
+  }
+}
+//////////////////////
+//Restart from refresh
+//////////////////////
+const restart = () =>{
+  location.reload()
+}
 
 ////////////////////////////////////////////////
 //Compare input keyboard and array with solution
@@ -451,49 +494,19 @@ const listen = () =>{
   }
 }
 
-//////////////////////
-//Restart from refresh
-//////////////////////
-const restart = () =>{
-  location.reload()
-}
-
 /////////////////////
 //START
 ////////////////////
-if (dead === true){
-  drawRules()
+drawRules()
+
+const starter = () =>{
+  if (dead === true){
+    dead = false
+    ctx.clearRect(0, 0, 400, 300)
+    drawTime()  
+  }
+  draw()
 }
 
-document.addEventListener('keydown' , e =>{
-
-if (dead === true){
-  dead = false
-  ctx.clearRect(0, 0, 400, 300)
-}  
-  draw()
-})
-
-// au click v1.2
-// document.getElementById('a').addEventListener('click' , e => {
-// console.log(e)
-// solution.map( (element) => {
-//  if (element === 'a')
-//    found.push('a')
-//  else
-//    found.push('?')
-//  })
-// console.log(found)
-// })
-
-
-  
-
-
-
-
-
-
-
-
-
+document.addEventListener('keydown' , starter)
+document.addEventListener('click' , starter)
