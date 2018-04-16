@@ -7,11 +7,15 @@
 const canvas = document.getElementById('canvas')
 const ctx = canvas.getContext('2d')
 
-const word = {'id': 1, 'nb': 12, 'genre' : "feminin", 'name': 'photographie', 'img': '/img/photographie.jpg'}
+const wordList = [{'id': 1, 'nb': 12, 'genre' : "feminin", 'name': 'photographie', 'img': '/img/photographie.jpg'},
+                  {'id': 2, 'nb': 4, 'genre' : "masculin", 'name': 'geek', 'img': '/img/geek.jpg'}]
+
+const word = wordList[1]
 const solution = word.name.split('')
 
 const body = document.getElementById('body')
 const help1 = document.getElementById('indice1')
+let bgColor = 'bg-light'
 
 let boucle = true
 let dead = true
@@ -127,7 +131,7 @@ const indiceTwo = () =>{
 }
 
 const indiceThree = () => {
-  body.style.backgroundImage = "url('img/photographie.jpg')"
+  body.style.backgroundImage = `url('img/${word.name}.jpg')`
 }
 
 const loupeIndice = () => {
@@ -208,6 +212,7 @@ if (dead === false){
 else{
     ctx.clearRect(0, 0, 400, 300)
     drawText('GAME OVER')
+    dead = true
     canvas.style.border = '2px solid red'
     document.getElementById('lettre').innerHTML = `<span class="invisible"><h1>GAME OVER</h1></span>`
     document.getElementById('body').style.background = 'black'
@@ -328,18 +333,19 @@ const drawHead = () => {
 ////////// 
 
 const makeKeyboard = () => {
-    const mapped1 = key[0].map(src => `<div id="lettre${src.toUpperCase()}" class="key col-1">${src}</div>`).join('')
-    const mapped2 = key[1].map(src => `<div id="lettre${src.toUpperCase()}" class="key col-1">${src}</div>`).join('')
-    const mapped3 = key[2].map(src => `<div id="lettre${src.toUpperCase()}" class="key col-1">${src}</div>`).join('')
-    const mapped4 = key[3].map(src => `<div id="lettre${src.toUpperCase()}" class="key col-5">${src}</div>`).join('')
 
-    return ` 
-      <div class="row justify-content-center"> ${mapped1} </div>
-      <div class="row justify-content-center"> ${mapped2} </div>
-      <div class="row justify-content-center"> ${mapped3} </div>
-      <div class="row justify-content-center"> ${mapped4} </div>
-    `
+  let i = 0
+  const keyboard = []
+
+  while (i < key.length){
+    const mapped = key[i].map(arrLine => `<div id="lettre${arrLine.toUpperCase()}" class="key text-uppercase col-1">${arrLine}</div>`).join('') 
+    keyboard.push(`<div class="row bg-inverse text-white justify-content-center"> ${mapped}</div>`)
+    i++
+  }
+
+  return keyboard
 }
+
 
 document.getElementById('keyboard').innerHTML = makeKeyboard(key)
 
@@ -404,7 +410,7 @@ const listen = () =>{
         found.push(' _ ')
       }
     })
-    document.getElementById('lettre').innerHTML = `<span class="find col-auto border border-danger"><h1>${found.join('').toUpperCase()}</h1></span>`
+    document.getElementById('lettre').innerHTML = `<span class="bg-light  col-auto border border-danger"><h1>${found.join('').toUpperCase()}</h1></span>`
   }
   else
     i++
