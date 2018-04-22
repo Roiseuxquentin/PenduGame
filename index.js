@@ -282,7 +282,6 @@ const drawRules = () => {
   ctx.fillText(`PENDU GAME`, 115, 50)
   ctx.moveTo(40, 60)
   ctx.lineTo(360, 60)
-  ctx.strokeStyle = "black"
   ctx.stroke()
   while (i < 8) {
     ctx.font = `${15 - i}px Courier`
