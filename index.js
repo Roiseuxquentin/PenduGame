@@ -150,7 +150,6 @@ const indiceTwo = (nbkill) => {
     removeKey(diff[diffRdm])
     i++
   }
-  console.log(arr)
   pub.push(`Il n'y a pas les lettres : ${arr.join('').split('')}`)
   pub.pop
 }
@@ -219,7 +218,6 @@ const draw = () => {
 
   if (pub[pub.length - 1] === undefined)
     delete pub[pub.length - 1]
-  console.log(pub)
 
   if (dead === false) {
     document.addEventListener('click', klick)
@@ -287,7 +285,6 @@ const drawRules = () => {
     ctx.font = `${15 - i}px Courier`
     ctx.fillText(`${rules[i]}`, 40, 95 + (25 * (i++)))
     ctx.closePath()
-
   }
 }
 
@@ -304,7 +301,7 @@ const drawTime = () => {
       ctx.fillStyle = "red"
       ctx.fillText(`${time}`, 20, 60)
     }
-    else if (time > 3) {
+    else{
       ctx.arc(10, -10, 100, 0, Math.PI * 2)
       ctx.fillStyle = "red"
       ctx.fill()
@@ -474,7 +471,6 @@ const klick = () => {
 
   if (found.join('') === word.name) {
 
-    console.log('win')
     document.getElementById('lettre').innerHTML = `<span class="invisible"><h1>BRAVO!</h1></span>`
     ctx.clearRect(0, 0, 400, 300)
     drawText(' *BRAVO*')
@@ -541,7 +537,6 @@ const listen = () => {
 
   if (found.join('') === word.name) {
 
-    console.log('win')
     document.getElementById('lettre').innerHTML = `<span class="invisible"><h1>BRAVO!</h1></span>`
     ctx.clearRect(0, 0, 400, 300)
     drawText(' *BRAVO*')
@@ -568,7 +563,7 @@ const starter = () => {
   if (dead === true) {
     dead = false
     ctx.clearRect(0, 0, 400, 300)
-    setInterval(drawPub, 50)
+    setInterval(drawPub, 30)
     drawTime()
   }
   draw()
