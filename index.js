@@ -121,9 +121,9 @@ const addTime = () => {
 
   if (time === 0) {
     if (route > 2)
-    i++
+      i++
     if (route < 4)
-    route++
+      route++
     time = 10
     helpDeclencheur(route)
     draw()
@@ -265,6 +265,15 @@ const draw = () => {
 ////////////////////////////
 
 const drawRules = () => {
+  let i = 0
+  const rules = ['1 - Trouver les maux avant le pendu',
+    `2 - Le mot compte ${word.nb} lettres! `,
+    '3 - Il est surement Français...',
+    '4 - Les premiers temps c cool',
+    '5 - Des indices tu auras...',
+    '6 - Apres touche les touches ',
+    '7 - Mais pas toutes ... ',
+    `8 - GL & HF`]
 
   ctx.clearRect(0, 0, 150, 150)
   ctx.beginPath()
@@ -275,21 +284,12 @@ const drawRules = () => {
   ctx.lineTo(360, 60)
   ctx.strokeStyle = "black"
   ctx.stroke()
-  ctx.font = "14px Courier"
-  ctx.fillText(`1 - Trouver les maux avant le pendu `, 40, 95)
-  ctx.fillText(`2 - Le mot qui nous concernes fait :`, 40, 125)
-  ctx.fillText(` ${word.nb} lettres! `, 240, 140)
-  ctx.font = "14px Courier";
-  ctx.fillText(`3 - Le mots est en Français , parfois...`, 40, 160)
-  ctx.font = "13px Courier";
-  ctx.fillText(`4 - Les premiers temps c'est cool !`, 40, 190)
-  ctx.font = "12px Courier";
-  ctx.fillText(`5 - Des indices tu auras...`, 40, 215)
-  ctx.font = "11px Courier";
-  ctx.fillText(`6 - Apres touche les touches.. `, 40, 240)
-  ctx.font = "10px Courier";
-  ctx.fillText(`7 - Mais pas toute , GL & HF `, 40, 265)
-  ctx.closePath()
+  while (i < 8) {
+    ctx.font = `${15 - i}px Courier`
+    ctx.fillText(`${rules[i]}`, 40, 95 + (25 * (i++)))
+    ctx.closePath()
+
+  }
 }
 
 
