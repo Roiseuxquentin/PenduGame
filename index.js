@@ -301,7 +301,7 @@ const drawTime = () => {
       ctx.fillStyle = "red"
       ctx.fillText(`${time}`, 20, 60)
     }
-    else{
+    else {
       ctx.arc(10, -10, 100, 0, Math.PI * 2)
       ctx.fillStyle = "red"
       ctx.fill()
