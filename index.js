@@ -16,7 +16,10 @@ const wordList = [{ 'id': 1, 'nb': 12, 'genre': "feminin", 'name': 'photographie
 { 'id': 5, 'nb': 6, 'genre': "feminin", 'name': 'mouette', 'img': '/img/' },
 { 'id': 6, 'nb': 10, 'genre': "indefinis", 'name': 'formidable', 'img': '/img/' },
 { 'id': 7, 'nb': 13, 'genre': "indefinis", 'name': 'extraordinaire', 'img': '/img/' },
-]
+{ 'id': 8, 'nb': 7, 'genre': "masculin", 'name': 'clavier', 'img': '/img/' },
+{ 'id': 9, 'nb': 2, 'genre': "indefinis", 'name': 'or', 'img': '/img/' },
+{ 'id': 10, 'nb': 6, 'genre': "feminin", 'name': 'cigale', 'img': '/img/' },
+{ 'id': 11, 'nb': 9, 'genre': "feminin", 'name': 'pirouette', 'img': '/img/' },]
 
 const body = document.getElementById('body')
 const help1 = document.getElementById('indice1')
@@ -278,13 +281,13 @@ const drawRules = () => {
   ctx.font = "14px Courier";
   ctx.fillText(`3 - Le mots est en Français , parfois...`, 40, 160)
   ctx.font = "13px Courier";
-  ctx.fillText(`4 - Le Temps c'est cool !`, 40, 190)
+  ctx.fillText(`4 - Les premiers temps c'est cool !`, 40, 190)
   ctx.font = "12px Courier";
   ctx.fillText(`5 - Des indices tu auras...`, 40, 215)
   ctx.font = "11px Courier";
-  ctx.fillText(`6 - Les touches touchèes tentent et disparaissent`, 40, 240)
+  ctx.fillText(`6 - Apres touche les touches.. `, 40, 240)
   ctx.font = "10px Courier";
-  ctx.fillText(`7 - Se referrer aux 6 precedentes regles`, 40, 265)
+  ctx.fillText(`7 - Mais pas toute , GL & HF `, 40, 265)
   ctx.closePath()
 }
 
