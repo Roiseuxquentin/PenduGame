@@ -82,8 +82,8 @@ const rdmNb = (min, max) => {
 const word = wordList[rdmNb(0, wordList.length - 1)]
 const solution = word.name.split('')
 let pub = ["Press or Click Pour Debuter !",
-  "Prend ton temps..",
-  "Attention au chrono ",
+  "A la fin des 3 premiers chronos",
+  "Des indices tu auras.. ",
   "Consone ou voyelle ?",]
 
 let cases = '<span class="col-auto"></span><span class="youp col-auto border border-danger"><h1>?</h1></span>'
@@ -120,9 +120,10 @@ const addTime = () => {
   time--
 
   if (time === 0) {
+    if (route > 2)
     i++
     if (route < 4)
-      route++
+    route++
     time = 10
     helpDeclencheur(route)
     draw()
@@ -224,7 +225,7 @@ const draw = () => {
     document.addEventListener('click', klick)
     document.addEventListener('keydown', listen)
     if (i === 0 && boucle === false) {
-      interval = setInterval(addTime, 1100)
+      interval = setInterval(addTime, 1000)
       i++
     }
 
