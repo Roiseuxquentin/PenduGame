@@ -9,14 +9,14 @@ const ctx = canvas.getContext('2d')
 const enseigne = document.getElementById('enseigne')
 const ctxPub = enseigne.getContext('2d')
 
-const wordList = [{'id': 1, 'nb': 12, 'genre' : "feminin", 'name': 'photographie', 'img': '/img/photographie.jpg'},
-                  {'id': 2, 'nb': 4, 'genre' : "masculin", 'name': 'geek', 'img': '/img/geek.jpg'},
-                  {'id': 3, 'nb': 10, 'genre' : "masculin", 'name': 'hologramme', 'img': '/img/'},
-                  {'id': 4, 'nb': 12, 'genre' : "masculin", 'name': 'cumulonimbus', 'img': '/img/'},
-                  {'id': 5, 'nb': 6, 'genre' : "feminin", 'name': 'mouette', 'img': '/img/'},
-                  {'id': 6, 'nb': 10, 'genre' : "indefinis", 'name': 'formidable', 'img': '/img/'},
-                  {'id': 7, 'nb': 13, 'genre' : "indefinis", 'name': 'extraordinaire', 'img': '/img/'},
-                  ]
+const wordList = [{ 'id': 1, 'nb': 12, 'genre': "feminin", 'name': 'photographie', 'img': '/img/photographie.jpg' },
+{ 'id': 2, 'nb': 4, 'genre': "masculin", 'name': 'geek', 'img': '/img/geek.jpg' },
+{ 'id': 3, 'nb': 10, 'genre': "masculin", 'name': 'hologramme', 'img': '/img/' },
+{ 'id': 4, 'nb': 12, 'genre': "masculin", 'name': 'cumulonimbus', 'img': '/img/' },
+{ 'id': 5, 'nb': 6, 'genre': "feminin", 'name': 'mouette', 'img': '/img/' },
+{ 'id': 6, 'nb': 10, 'genre': "indefinis", 'name': 'formidable', 'img': '/img/' },
+{ 'id': 7, 'nb': 13, 'genre': "indefinis", 'name': 'extraordinaire', 'img': '/img/' },
+]
 
 const body = document.getElementById('body')
 const help1 = document.getElementById('indice1')
@@ -25,7 +25,7 @@ let bgColor = 'bg-light'
 let boucle = true
 let dead = true
 let array = []
- 
+
 
 let route = 0
 let i = -1
@@ -38,24 +38,24 @@ indice3 = help1.innerHTML = `<img class="rounded " width="80" src="indice.png" >
 indice1 = indice3
 indice2 = indice3
 
-let key =  [
-  ['q','w','e','r','t','y','u','i','o','p'],
-  ['a','s','d','f','g','h','j','k','l'],
-  ['z','x','c','v','b','n','m'],
+let key = [
+  ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
+  ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
+  ['z', 'x', 'c', 'v', 'b', 'n', 'm'],
   [' '],
-  ]
+]
 
 let position = [[50, 280, 300, 30],
-  [50, 280, 300, 20],
-  [111, 280, 20, -353],
-  [111, 0, 180, 20],
-  [280, 0, 20, 80],
-  [290, 100, 25, 0,],
-  [285, 125, 10, 70],
-  [285, 130, 260, 190],
-  [295, 130, 320, 190],
-  [250, 250, 285, 190],
-  [295, 188, 330, 250],]
+[50, 280, 300, 20],
+[111, 280, 20, -353],
+[111, 0, 180, 20],
+[280, 0, 20, 80],
+[290, 100, 25, 0,],
+[285, 125, 10, 70],
+[285, 130, 260, 190],
+[295, 130, 320, 190],
+[250, 250, 285, 190],
+[295, 188, 330, 250],]
 
 
 
@@ -66,8 +66,8 @@ let position = [[50, 280, 300, 30],
 //random number
 ///////////////
 
-const rdmNb = (min , max) => {
-  let nb= Math.random() * (max - min) + min; 
+const rdmNb = (min, max) => {
+  let nb = Math.random() * (max - min) + min;
   return Math.round(nb)
 }
 
@@ -76,12 +76,12 @@ const rdmNb = (min , max) => {
 //letters
 //////////
 
-const word = wordList[rdmNb(0,wordList.length - 1)]
+const word = wordList[rdmNb(0, wordList.length - 1)]
 const solution = word.name.split('')
-let pub = [ "Press or Click Pour Debuter !",
-            "Prend ton temps..",
-            "Attention au chrono ",
-            "Consone ou voyelle ?",]
+let pub = ["Press or Click Pour Debuter !",
+  "Prend ton temps..",
+  "Attention au chrono ",
+  "Consone ou voyelle ?",]
 
 let cases = '<span class="col-auto"></span><span class="youp col-auto border border-danger"><h1>?</h1></span>'
 document.getElementById('lettre').innerHTML = cases.repeat(word.nb)
@@ -96,38 +96,38 @@ document.getElementById('lettre').innerHTML = cases.repeat(word.nb)
 
 const addTime = () => {
 
-ctx.clearRect(0, 0, 90, 80)
+  ctx.clearRect(0, 0, 90, 80)
 
   drawTime()
 
-    if ((time < 4 ) && time > 0 ){
-      canvas.style.background = "red"
-      canvas.style.border = '3px solid black'
+  if ((time < 4) && time > 0) {
+    canvas.style.background = "red"
+    canvas.style.border = '3px solid black'
 
-    }
-    else if (dead === false) {
-      canvas.style.background = 'white'
-      canvas.style.border = '3px solid red'
-    }
-    else if (i === 11) 
-      canvas.style.background = 'white'
-    else 
-      canvas.style.background = 'black'
+  }
+  else if (dead === false) {
+    canvas.style.background = 'white'
+    canvas.style.border = '3px solid red'
+  }
+  else if (i === 11)
+    canvas.style.background = 'white'
+  else
+    canvas.style.background = 'black'
 
-    time--
+  time--
 
-    if (time === 0){
-      i++
-      if (route < 4)
-        route++
-      time = 10
-      helpDeclencheur(route)   
-      draw()
-    }
-    if (i >= 10){
-       time = -1
-    
-    }
+  if (time === 0) {
+    i++
+    if (route < 4)
+      route++
+    time = 10
+    helpDeclencheur(route)
+    draw()
+  }
+  if (i >= 10) {
+    time = -1
+
+  }
 }
 
 
@@ -136,19 +136,19 @@ ctx.clearRect(0, 0, 90, 80)
 //INDICEs injection
 /////////////////////
 
-const indiceTwo = (nbkill) =>{
-    let i = 0
-    const arr = []
-    while (i < nbkill){
-      let diff = key[i].filter(element => !solution.includes(element));
-      let diffRdm = rdmNb(0, diff.length - 1)
-      arr.push(`${diff[diffRdm]}`)
-      removeKey(diff[diffRdm])
-      i++
-    }
-    console.log(arr)
-    pub.push(`Il n'y a pas les lettres : ${arr.join('').split('')}`)
-    pub.pop
+const indiceTwo = (nbkill) => {
+  let i = 0
+  const arr = []
+  while (i < nbkill) {
+    let diff = key[i].filter(element => !solution.includes(element));
+    let diffRdm = rdmNb(0, diff.length - 1)
+    arr.push(`${diff[diffRdm]}`)
+    removeKey(diff[diffRdm])
+    i++
+  }
+  console.log(arr)
+  pub.push(`Il n'y a pas les lettres : ${arr.join('').split('')}`)
+  pub.pop
 }
 
 const indiceThree = () => {
@@ -157,7 +157,7 @@ const indiceThree = () => {
 
 const loupeIndice = () => {
 
-    return `
+  return `
       <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-auto indice1">${indice1}
@@ -169,34 +169,34 @@ const loupeIndice = () => {
         </div>
       </div>
       `
-  
+
 }
 
 
 const helpDeclencheur = (route) => {
 
-  help1.innerHTML = loupeIndice(indice1,indice2,indice3) 
-  if (route === 1){
+  help1.innerHTML = loupeIndice(indice1, indice2, indice3)
+  if (route === 1) {
     indice1 = `<img class="invisible" width="80" src="indice.png" >`
-    help1.innerHTML = loupeIndice(indice1,indice2,indice3)
+    help1.innerHTML = loupeIndice(indice1, indice2, indice3)
     pub = [' ',
-          `Le mot est du genre ${word.genre}`,
-          `Le mot fait ${word.nb} lettres !`]
+      `Le mot est du genre ${word.genre}`,
+      `Le mot fait ${word.nb} lettres !`]
 
-  
+
 
   }
-  
-  else if (route === 2){
+
+  else if (route === 2) {
     indiceTwo(2)
     indice3 = `<img class="invisible" width="80" src="indice.png" >`
     //action pour insice 2 sur keyboard
-    help1.innerHTML = loupeIndice(indice1,indice2,indice3)
+    help1.innerHTML = loupeIndice(indice1, indice2, indice3)
   }
-  else if (route === 3){
+  else if (route === 3) {
     indice2 = `<img class="invisible" width="80" src="indice.png" >`
- //   indiceThree()    
-    help1.innerHTML = loupeIndice(indice1,indice2,indice3)
+    //   indiceThree()    
+    help1.innerHTML = loupeIndice(indice1, indice2, indice3)
     indiceTwo(3)
   }
   else
@@ -204,7 +204,7 @@ const helpDeclencheur = (route) => {
 }
 
 helpDeclencheur(route)
-  
+
 
 ////////////////
 //Drawing board
@@ -217,30 +217,30 @@ const draw = () => {
     delete pub[pub.length - 1]
   console.log(pub)
 
-if (dead === false){  
-  document.addEventListener('click' , klick)
-  document.addEventListener('keydown', listen)
-  if (i === 0 && boucle === false){
-    interval = setInterval(addTime , 1100)
-    i++
-  }
+  if (dead === false) {
+    document.addEventListener('click', klick)
+    document.addEventListener('keydown', listen)
+    if (i === 0 && boucle === false) {
+      interval = setInterval(addTime, 1100)
+      i++
+    }
 
-  if (i <= 6 && i !== 5){
-    drawPotence()
-  }
-  
-  if (i === 5) {
+    if (i <= 6 && i !== 5) {
+      drawPotence()
+    }
+
+    if (i === 5) {
       drawHead()
+    }
+
+    if (i >= 7 && i < 10)
+      drawMembre()
+    if (i === 10) {
+      dead = true
+      draw()
+    }
   }
-  
-  if (i >= 7 && i < 10)
-    drawMembre()
-  if (i === 10){
-    dead = true
-    draw()
-  }
-}
-else{
+  else {
     ctx.clearRect(0, 0, 400, 300)
     drawText('GAME OVER')
     dead = true
@@ -249,7 +249,7 @@ else{
     document.getElementById('body').style.background = 'black'
     body.addEventListener('click', restart)
     body.addEventListener('keydown', restart)
-    
+
   }
 }
 
@@ -260,71 +260,71 @@ else{
 // [x, y, w, h]
 ////////////////////////////
 
-const drawRules = () =>{
-  
-    ctx.clearRect(0,0,150,150)
-    ctx.beginPath()
-    ctx.font="30px Courier";
-    ctx.fillStyle = "black"
-    ctx.fillText(`PENDU GAME`,115,50)
-    ctx.moveTo(40, 60)
-    ctx.lineTo(360, 60)
-    ctx.strokeStyle = "black"
-    ctx.stroke()
-    ctx.font="14px Courier"
-    ctx.fillText(`1 - Trouver les maux avant le pendu `,40,95)
-    ctx.fillText(`2 - Le mot qui nous concernes fait :`,40,125)
-    ctx.fillText(` ${word.nb} lettres! `, 240 , 140)
-    ctx.font="14px Courier";  
-    ctx.fillText(`3 - Le mots est en Français , parfois...`, 40,160)
-    ctx.font="13px Courier";  
-    ctx.fillText(`4 - Le Temps c'est cool !`,40,190)
-    ctx.font="12px Courier";  
-    ctx.fillText(`5 - Des indices tu auras...`,40,215)
-    ctx.font="11px Courier";  
-    ctx.fillText(`6 - Les touches touchèes tentent et disparaissent`,40,240)
-    ctx.font="10px Courier";  
-    ctx.fillText(`7 - Se referrer aux 6 precedentes regles`,40,265)
-    ctx.closePath()
+const drawRules = () => {
+
+  ctx.clearRect(0, 0, 150, 150)
+  ctx.beginPath()
+  ctx.font = "30px Courier";
+  ctx.fillStyle = "black"
+  ctx.fillText(`PENDU GAME`, 115, 50)
+  ctx.moveTo(40, 60)
+  ctx.lineTo(360, 60)
+  ctx.strokeStyle = "black"
+  ctx.stroke()
+  ctx.font = "14px Courier"
+  ctx.fillText(`1 - Trouver les maux avant le pendu `, 40, 95)
+  ctx.fillText(`2 - Le mot qui nous concernes fait :`, 40, 125)
+  ctx.fillText(` ${word.nb} lettres! `, 240, 140)
+  ctx.font = "14px Courier";
+  ctx.fillText(`3 - Le mots est en Français , parfois...`, 40, 160)
+  ctx.font = "13px Courier";
+  ctx.fillText(`4 - Le Temps c'est cool !`, 40, 190)
+  ctx.font = "12px Courier";
+  ctx.fillText(`5 - Des indices tu auras...`, 40, 215)
+  ctx.font = "11px Courier";
+  ctx.fillText(`6 - Les touches touchèes tentent et disparaissent`, 40, 240)
+  ctx.font = "10px Courier";
+  ctx.fillText(`7 - Se referrer aux 6 precedentes regles`, 40, 265)
+  ctx.closePath()
 }
 
 
 const drawTime = () => {
-  
-  if (dead === false) {  
+
+  if (dead === false) {
     ctx.beginPath()
-    if (time < 4){
-      ctx.arc(10, -10, 100,0, Math.PI * 2)
+    if (time < 4) {
+      ctx.arc(10, -10, 100, 0, Math.PI * 2)
       ctx.fillStyle = "white"
       ctx.fill()
-      ctx.font="80px Courier"
+      ctx.font = "80px Courier"
       ctx.fillStyle = "red"
-      ctx.fillText(`${time}`,20,60)
+      ctx.fillText(`${time}`, 20, 60)
     }
-    else if (time > 3){
-      ctx.arc(10, -10, 100,0, Math.PI * 2)
+    else if (time > 3) {
+      ctx.arc(10, -10, 100, 0, Math.PI * 2)
       ctx.fillStyle = "red"
       ctx.fill()
-      ctx.font="40px Courier"
+      ctx.font = "40px Courier"
       ctx.fillStyle = "white"
-      ctx.fillText(`${time}`,20,50)
+      ctx.fillText(`${time}`, 20, 50)
     }
     ctx.closePath()
   }
 }
 
-const drawText = (text) =>{
+const drawText = (text) => {
   ctx.beginPath()
 
-  ctx.font="60px Courier";
+  ctx.font = "60px Courier";
   ctx.fillStyle = "red"
-  ctx.fillText(`${text}`,40,150)
-  ctx.font="20px Courier"
+  ctx.fillText(`${text}`, 40, 150)
+  ctx.font = "20px Courier"
   if (i === 10)
     ctx.fillStyle = "white"
-  else 
+  else
     ctx.fillStyle = "black"
-  ctx.fillText(`Press or Click pour rejouer`,50,200);
+  ctx.fillText(`Press or Click pour rejouer`, 50, 200);
   ctx.closePath()
 
 }
@@ -341,39 +341,39 @@ const drawPotence = () => {
 
 const drawPub = () => {
 
-  ctxPub.clearRect(0,0,400,30)
+  ctxPub.clearRect(0, 0, 400, 30)
 
-  if (posPub <= -500){
+  if (posPub <= -500) {
     posPub = 400
     publi++
   }
-  else if (publi > pub.length - 1 )
+  else if (publi > pub.length - 1)
     publi = 1
-  else if (dead === true){
+  else if (dead === true) {
     ctxPub.beginPath()
-    ctxPub.font="22px Courier"
+    ctxPub.font = "22px Courier"
     ctxPub.fillStyle = "white"
-    ctxPub.fillText(`${word.name.toUpperCase()}`,150,20) 
+    ctxPub.fillText(`${word.name.toUpperCase()}`, 150, 20)
     ctxPub.closePath()
   }
-  else{
+  else {
     posPub -= 5
     ctxPub.beginPath()
-    ctxPub.font="20px Courier"
+    ctxPub.font = "20px Courier"
     if (time > 3)
       ctxPub.fillStyle = "white"
-    else 
-      ctxPub.fillStyle = "red"  
-    ctxPub.fillText(`${pub[publi]}`,posPub,20) 
+    else
+      ctxPub.fillStyle = "red"
+    ctxPub.fillText(`${pub[publi]}`, posPub, 20)
     ctxPub.closePath()
-  }    
+  }
 }
 
 
 const drawMembre = () => {
   ctx.beginPath()
   ctx.moveTo(position[i][0], position[i][1])
-  ctx.lineTo(position[i][2],position[i][3])
+  ctx.lineTo(position[i][2], position[i][3])
   ctx.strokeStyle = "black"
   ctx.stroke()
   ctx.closePath()
@@ -383,7 +383,7 @@ const drawHead = () => {
 
   ctx.beginPath()
   // ctx.arc(290, 100, 25, 0, Math.PI * 2)
-  ctx.arc(position[i][0],position[i][1],position[i][2],position[i][3], Math.PI * 2)
+  ctx.arc(position[i][0], position[i][1], position[i][2], position[i][3], Math.PI * 2)
   ctx.fillStyle = "white"
   ctx.fill()
   ctx.strokeStyle = "black"
@@ -401,8 +401,8 @@ const makeKeyboard = () => {
   let i = 0
   const keyboard = []
 
-  while (i < key.length){
-    const mapped = key[i].map(arrLine => `<div id="lettre${arrLine.toUpperCase()}" class="key text-uppercase col-1">${arrLine}</div>`).join('') 
+  while (i < key.length) {
+    const mapped = key[i].map(arrLine => `<div id="lettre${arrLine.toUpperCase()}" class="key text-uppercase col-1">${arrLine}</div>`).join('')
     keyboard.push(`<div class="row bg-inverse text-white justify-content-center"> ${mapped}</div>`)
     i++
   }
@@ -410,23 +410,23 @@ const makeKeyboard = () => {
   return keyboard
 }
 
-const removeKey = (keyName) =>{
+const removeKey = (keyName) => {
   let index
   let i = 0
 
-    
-  while (i < key.length){
-    if (key[i].includes(keyName)){
-        index = (key[i].indexOf(keyName))
-        delete key[i][index]
+
+  while (i < key.length) {
+    if (key[i].includes(keyName)) {
+      index = (key[i].indexOf(keyName))
+      delete key[i][index]
     }
     i++
   }
 
- // key = key.map(arrLine => {
- //    delete key[arrLine].indexOf(keyName)
- //  })
-   document.getElementById('keyboard').innerHTML = makeKeyboard(key)
+  // key = key.map(arrLine => {
+  //    delete key[arrLine].indexOf(keyName)
+  //  })
+  document.getElementById('keyboard').innerHTML = makeKeyboard(key)
 }
 
 document.getElementById('keyboard').innerHTML = makeKeyboard(key)
@@ -434,7 +434,7 @@ document.getElementById('keyboard').innerHTML = makeKeyboard(key)
 //MOUSE CLICK
 /////////////
 
-const klick = () =>{
+const klick = () => {
 
   time = 10
   let found = []
@@ -442,21 +442,21 @@ const klick = () =>{
 
   removeKey(keyName)
 
-  if (boucle === true){
+  if (boucle === true) {
     addTime()
     boucle = false
   }
 
 
   if (solution.includes(keyName) === true) {
- 
+
     solution.map((element) => {
       if (element === keyName) {
-        
+
         found.push(keyName)
         array.push(keyName)
-      } 
-      else if (array.includes(element)) 
+      }
+      else if (array.includes(element))
         found.push(element)
       else {
         // fonction RATER////////////////////////////////////////////////////////
@@ -468,7 +468,7 @@ const klick = () =>{
   }
   else
     i++
-  
+
   if (found.join('') === word.name) {
 
     console.log('win')
@@ -482,16 +482,16 @@ const klick = () =>{
     body.addEventListener('click', restart)
     body.addEventListener('keydown', restart)
 
-}
-  
-  if (i <= 10){
-  draw() 
+  }
+
+  if (i <= 10) {
+    draw()
   }
 }
 //////////////////////
 //Restart from refresh
 //////////////////////
-const restart = () =>{
+const restart = () => {
   location.reload()
 }
 
@@ -501,7 +501,7 @@ const restart = () =>{
 //else draw on canvas and delete key to keyboard
 //////////////////////////////////////////////// 
 
-const listen = () =>{
+const listen = () => {
 
   time = 10
   let found = []
@@ -509,21 +509,21 @@ const listen = () =>{
 
   removeKey(keyName)
 
-  if (boucle === true){
+  if (boucle === true) {
     addTime()
     boucle = false
   }
 
 
   if (solution.includes(keyName) === true) {
- 
+
     solution.map((element) => {
       if (element === keyName) {
-        
+
         found.push(keyName)
         array.push(keyName)
-      } 
-      else if (array.includes(element)) 
+      }
+      else if (array.includes(element))
         found.push(element)
       else {
         // fonction RATER////////////////////////////////////////////////////////
@@ -535,7 +535,7 @@ const listen = () =>{
   }
   else
     i++
-  
+
   if (found.join('') === word.name) {
 
     console.log('win')
@@ -549,10 +549,10 @@ const listen = () =>{
     body.addEventListener('click', restart)
     body.addEventListener('keydown', restart)
 
-}
-  
-  if (i <= 10){
-  draw() 
+  }
+
+  if (i <= 10) {
+    draw()
   }
 }
 
@@ -561,15 +561,15 @@ const listen = () =>{
 ////////////////////
 drawRules()
 
-const starter = () =>{
-  if (dead === true){
+const starter = () => {
+  if (dead === true) {
     dead = false
     ctx.clearRect(0, 0, 400, 300)
-    setInterval(drawPub , 50)
-    drawTime()  
+    setInterval(drawPub, 50)
+    drawTime()
   }
   draw()
 }
 
-document.addEventListener('keydown' , starter)
-document.addEventListener('click' , starter)
+document.addEventListener('keydown', starter)
+document.addEventListener('click', starter)
